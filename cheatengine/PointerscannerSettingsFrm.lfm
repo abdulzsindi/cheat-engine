@@ -1,0 +1,728 @@
+object frmPointerScannerSettings: TfrmPointerScannerSettings
+  Left = 1076
+  Height = 461
+  Top = 172
+  Width = 630
+  BorderStyle = bsSingle
+  Caption = 'Pointerscanner scanoptions'
+  ClientHeight = 461
+  ClientWidth = 630
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  OnShow = FormShow
+  Position = poScreenCenter
+  LCLVersion = '1.3'
+  object cbMustEndWithSpecificOffset: TCheckBox
+    Left = 8
+    Height = 19
+    Top = 305
+    Width = 199
+    Caption = 'Pointers must end with specific offsets'
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    OnChange = cbMustEndWithSpecificOffsetChange
+    ParentFont = False
+    TabOrder = 0
+  end
+  object Panel1: TPanel
+    Left = 0
+    Height = 104
+    Top = 357
+    Width = 630
+    Align = alBottom
+    BevelOuter = bvNone
+    ClientHeight = 104
+    ClientWidth = 630
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
+    TabOrder = 1
+    OnClick = Panel1Click
+    object Label3: TLabel
+      AnchorSideRight.Control = editStructsize
+      Left = 115
+      Height = 13
+      Top = 42
+      Width = 105
+      Anchors = [akTop, akRight]
+      Caption = 'Maximum offset value:'
+      ParentColor = False
+    end
+    object Label12: TLabel
+      AnchorSideLeft.Control = btnCancel
+      AnchorSideRight.Control = editMaxLevel
+      AnchorSideRight.Side = asrCenter
+      Left = 288
+      Height = 13
+      Top = 42
+      Width = 45
+      Caption = 'Max level'
+      ParentColor = False
+    end
+    object Label9: TLabel
+      AnchorSideRight.Control = edtThreadcount
+      Left = 107
+      Height = 13
+      Top = 10
+      Width = 113
+      Anchors = [akTop, akRight]
+      Caption = 'Nr of threads scanning: '
+      ParentColor = False
+    end
+    object btnOk: TButton
+      Left = 200
+      Height = 25
+      Top = 68
+      Width = 80
+      Caption = 'OK'
+      Default = True
+      OnClick = btnOkClick
+      TabOrder = 0
+    end
+    object editStructsize: TEdit
+      AnchorSideRight.Control = btnOk
+      AnchorSideRight.Side = asrBottom
+      Left = 220
+      Height = 21
+      Top = 38
+      Width = 60
+      Anchors = [akTop, akRight]
+      TabOrder = 1
+      Text = '2047'
+    end
+    object editMaxLevel: TEdit
+      AnchorSideLeft.Control = Label12
+      AnchorSideLeft.Side = asrBottom
+      AnchorSideRight.Control = ComboBox1
+      AnchorSideRight.Side = asrBottom
+      Left = 341
+      Height = 21
+      Top = 38
+      Width = 87
+      Anchors = [akTop, akLeft, akRight]
+      BorderSpacing.Left = 8
+      TabOrder = 2
+      Text = '5'
+    end
+    object btnCancel: TButton
+      Left = 288
+      Height = 25
+      Top = 68
+      Width = 93
+      Cancel = True
+      Caption = 'Cancel'
+      ModalResult = 2
+      TabOrder = 3
+    end
+    object edtThreadcount: TEdit
+      AnchorSideLeft.Control = editStructsize
+      AnchorSideRight.Control = btnOk
+      AnchorSideRight.Side = asrBottom
+      Left = 220
+      Height = 21
+      Top = 6
+      Width = 60
+      Anchors = [akTop, akLeft, akRight]
+      TabOrder = 4
+      Text = '2'
+    end
+    object ComboBox1: TComboBox
+      AnchorSideLeft.Control = btnCancel
+      AnchorSideTop.Control = edtThreadcount
+      Left = 288
+      Height = 21
+      Top = 6
+      Width = 140
+      ItemHeight = 13
+      ItemIndex = 3
+      Items.Strings = (
+        'Idle'
+        'Lowest'
+        'Lower'
+        'Normal'
+        'Higher'
+        'Highest'
+        'TimeCritical'
+      )
+      Style = csDropDownList
+      TabOrder = 5
+      Text = 'Normal'
+    end
+  end
+  object cbValueType: TComboBox
+    Left = 501
+    Height = 21
+    Top = 42
+    Width = 132
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ItemHeight = 13
+    ItemIndex = 0
+    Items.Strings = (
+      '4 Byte'
+      'Float'
+      'Double'
+    )
+    ParentFont = False
+    Style = csDropDownList
+    TabOrder = 2
+    Text = '4 Byte'
+  end
+  object Panel2: TPanel
+    Left = 8
+    Height = 25
+    Top = 0
+    Width = 625
+    BevelOuter = bvNone
+    ClientHeight = 25
+    ClientWidth = 625
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    ParentFont = False
+    TabOrder = 3
+    object rbFindAddress: TRadioButton
+      Left = 0
+      Height = 19
+      Top = 4
+      Width = 100
+      Caption = 'Scan for address'
+      Checked = True
+      OnChange = rbFindValueClick
+      TabOrder = 0
+      TabStop = True
+    end
+    object rbFindValue: TRadioButton
+      Left = 104
+      Height = 19
+      Top = 4
+      Width = 162
+      Caption = 'Scan for addresses with value'
+      OnChange = rbFindValueClick
+      TabOrder = 1
+    end
+    object rbGeneratePointermap: TRadioButton
+      Left = 275
+      Height = 19
+      Top = 4
+      Width = 119
+      Caption = 'Generate pointermap'
+      OnChange = rbFindValueClick
+      TabOrder = 2
+    end
+  end
+  object cbUseLoadedPointermap: TCheckBox
+    Left = 8
+    Height = 19
+    Hint = 'Use this if you have created a pointermap on a system that runs the game, but you wish to do the scan on another system (or multiple systems).'#13#10'Checking this option will open a dialog where you can select the pointermap'
+    Top = 24
+    Width = 126
+    BorderSpacing.Top = 1
+    Caption = 'Use saved pointermap'
+    OnChange = cbUseLoadedPointermapChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 4
+  end
+  object cbAllowRuntimeWorkers: TCheckBox
+    AnchorSideLeft.Control = cbShowAdvancedOptions
+    Left = 291
+    Height = 19
+    Hint = 'Opens a port that other systems running the pointerscanner can connect to and help out with the scan'
+    Top = 288
+    Width = 194
+    Caption = 'Allow scanners to connect at runtime'
+    OnChange = cbAllowRuntimeWorkersChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 5
+  end
+  object edtDistributedPort: TEdit
+    AnchorSideLeft.Control = lblPort
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = lblPort
+    AnchorSideTop.Side = asrCenter
+    Left = 329
+    Height = 21
+    Top = 308
+    Width = 103
+    Enabled = False
+    TabOrder = 6
+    Text = '52737'
+  end
+  object lblPort: TLabel
+    AnchorSideLeft.Control = cbAllowRuntimeWorkers
+    AnchorSideTop.Control = cbAllowRuntimeWorkers
+    AnchorSideTop.Side = asrBottom
+    Left = 307
+    Height = 13
+    Top = 312
+    Width = 22
+    BorderSpacing.Left = 16
+    BorderSpacing.Top = 5
+    Caption = 'Port:'
+    ParentColor = False
+  end
+  object cbConnectToNode: TCheckBox
+    AnchorSideLeft.Control = cbAllowRuntimeWorkers
+    AnchorSideTop.Control = edtDistributedPort
+    AnchorSideTop.Side = asrBottom
+    Left = 291
+    Height = 19
+    Hint = 'When checked will send a broadcast message on the local network which will tell pointer scanner systems to join this scan if they are set to auto join'#13#10#13#10'You can use "Setup specific IP''s to notify" to notify systems of this scan that are outside of the local network'
+    Top = 329
+    Width = 157
+    Caption = 'Connect to pointerscan node'
+    OnChange = cbConnectToNodeChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 7
+  end
+  object cbMustStartWithBase: TCheckBox
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 19
+    Hint = 'Will only mark the given range as valid base address (Will reduce the number of results)'#13#10'This internally makes use of the "Only find paths with a static address" feature by marking the provided range as static only, so it must be enabled.'
+    Top = 288
+    Width = 204
+    Caption = 'Base address must be in specific range'
+    OnChange = cbMustStartWithBaseChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 8
+  end
+  object cbCompareToOtherPointermaps: TCheckBox
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 19
+    Hint = 'When ticked you can add other pointermaps which will be used to verify that the pointers it finds are correct. You will have to fill in the correct address for each pointermap you provide.'#13#10'Note: expect at least the size of the game itself in memory for every pointermap used'#13#10
+    Top = 64
+    Width = 242
+    BorderSpacing.Top = 1
+    Caption = 'Compare results with other saved pointermap(s)'
+    OnChange = cbCompareToOtherPointermapsChange
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 9
+  end
+  object edtDistributedPassword: TEdit
+    AnchorSideLeft.Control = Label1
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtDistributedPort
+    AnchorSideRight.Control = Owner
+    AnchorSideRight.Side = asrBottom
+    Left = 488
+    Height = 21
+    Top = 308
+    Width = 137
+    Anchors = [akTop, akLeft, akRight]
+    BorderSpacing.Left = 5
+    BorderSpacing.Right = 5
+    Enabled = False
+    MaxLength = 255
+    TabOrder = 10
+  end
+  object Label1: TLabel
+    AnchorSideLeft.Control = edtDistributedPort
+    AnchorSideLeft.Side = asrBottom
+    AnchorSideTop.Control = edtDistributedPort
+    AnchorSideTop.Side = asrCenter
+    Left = 437
+    Height = 13
+    Top = 312
+    Width = 46
+    BorderSpacing.Left = 5
+    Caption = 'Password'
+    ParentColor = False
+  end
+  object cbShowAdvancedOptions: TCheckBox
+    AnchorSideTop.Side = asrBottom
+    Left = 291
+    Height = 19
+    Top = 64
+    Width = 135
+    Caption = 'Show advanced options'
+    OnChange = cbShowAdvancedOptionsChange
+    TabOrder = 11
+  end
+  object Panel3: TPanel
+    AnchorSideTop.Side = asrBottom
+    Left = 8
+    Height = 208
+    Top = 80
+    Width = 616
+    BevelOuter = bvNone
+    BorderStyle = bsSingle
+    ClientHeight = 204
+    ClientWidth = 612
+    Color = clWindow
+    ParentColor = False
+    TabOrder = 12
+    Visible = False
+    object Label10: TLabel
+      Left = 4
+      Height = 13
+      Top = 105
+      Width = 23
+      Caption = 'From'
+      ParentColor = False
+    end
+    object Label11: TLabel
+      Left = 4
+      Height = 13
+      Top = 127
+      Width = 16
+      Caption = 'To:'
+      ParentColor = False
+    end
+    object Label13: TLabel
+      Left = 4
+      Height = 13
+      Top = 83
+      Width = 200
+      Caption = 'Pointer path may only be inside this region:'
+      ParentColor = False
+    end
+    object CbAlligned: TCheckBox
+      Left = 8
+      Height = 19
+      Hint = 'When enabled, only pointers that are stored in an address dividable by 4 are looked at'#13#10'When disabled, it won''t bother.'#13#10#13#10'pro: Fast scans'#13#10'Con: On some horrible designed games that you shouldn''t even play it won''t find the paths'
+      Top = 0
+      Width = 177
+      Caption = 'Addresses must be 32-bit alligned'
+      Checked = True
+      OnChange = canNotReuse
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 0
+    end
+    object edtReverseStop: TEdit
+      Left = 28
+      Height = 21
+      Top = 124
+      Width = 80
+      CharCase = ecUppercase
+      MaxLength = 8
+      OnChange = canNotReuse
+      TabOrder = 1
+      Text = '7FFFFFFF'
+    end
+    object edtReverseStart: TEdit
+      Left = 28
+      Height = 21
+      Top = 102
+      Width = 80
+      CharCase = ecUppercase
+      MaxLength = 8
+      OnChange = canNotReuse
+      TabOrder = 2
+      Text = '00000000'
+    end
+    object cbStaticOnly: TCheckBox
+      Left = 8
+      Height = 19
+      Hint = 'When checked the pointerscan will only store a path when it starts with a static address. (or easily looked up address)'#13#10'When it''s disabled, it finds every single pointer path'#13#10#13#10'pro: Fast'#13#10'con: It may miss pointers that are accessed by special paths like thread local storage. (but even then they''d be useless for ce as they will change)'
+      Top = 20
+      Width = 189
+      Caption = 'Only find paths with a static address'
+      Checked = True
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 3
+    end
+    object cbUseHeapData: TCheckBox
+      Left = 8
+      Height = 19
+      Hint = 'When this is checked the heap is used to figure out the offset sizes, instead of blindly guessing them.'#13#10'pro: Greatly improve speed and a lot less useless results'#13#10'con: if the game allocates gigantic chunks of heap memory, and then divides it up itself, this will give wrong results.'#13#10#13#10'In other cases this will give perfect pointers '
+      Top = 146
+      Width = 234
+      Caption = 'Improve pointerscan with gathered heap data'
+      OnClick = cbUseHeapDataClick
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+    end
+    object cbHeapOnly: TCheckBox
+      Left = 24
+      Height = 19
+      Hint = 'If the address you search for isn''t a heap address, the scan will return 0 results'
+      Top = 165
+      Width = 248
+      Caption = 'Only allow static and heap addresses in the path'
+      Enabled = False
+      OnClick = cbHeapOnlyClick
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 5
+    end
+    object cbOnlyOneStatic: TCheckBox
+      Left = 8
+      Height = 19
+      Hint = 'When the pointerscanner goes through the list of pointervalues with a specific value, this will stop exploring other paths as soon as it encounters a static pointer to that value'#13#10#13#10'pro: Fast'#13#10'con: You may miss some valid results '
+      Top = 60
+      Width = 267
+      Caption = 'Stop traversing a path when a static has been found'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 6
+    end
+    object cbNoReadOnly: TCheckBox
+      Left = 8
+      Height = 19
+      Hint = 'When checked the pointerscan will throw away memory that is readonly. So when it looks for paths, it won''t encounter paths that pass through read only memory blocks.'#13#10#13#10'When it''s unchecked, it does include readonly memory'#13#10#13#10#13#10'pro: faster, less useless results'#13#10'con: If the game decides to mark a pointer as readonly ce won''t find it '
+      Top = 40
+      Width = 222
+      Caption = 'Don''t include pointers with read-only nodes'
+      Checked = True
+      OnChange = canNotReuse
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 7
+    end
+    object cbClassPointersOnly: TCheckBox
+      Left = 281
+      Height = 19
+      Hint = 'Object oriented programming languages tend to implement classobjects by having a pointer in the first element to something that describes the class'#13#10'With this option enabled, ce will check if it''s a classobject by checking that rule. If not, it won''t see it as a pointer.'#13#10'pro:Tremendous speed increase and almost perfect pointers'#13#10'con:Doesn''t work with runtime generated classes (java, .net) '
+      Top = 0
+      Width = 308
+      Caption = 'First element of pointerstruct must point to module (e.g vtable)'
+      OnChange = canNotReuse
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 8
+    end
+    object cbNoLoop: TCheckBox
+      Left = 281
+      Height = 19
+      Hint = 'This will filter out pointerpaths that ended up in a loop'#13#10'e.g:'#13#10'base->p1->p2->p3->p1->p4'#13#10#13#10'you could just as well do base->p1->p4 then, so throw this one away (base->p1->p4 will be found another way)'#13#10#13#10'pro: Less results so less diskspace used'#13#10'con: slightly slows down the scan as it needs to check for loops every single iteration '
+      Top = 40
+      Width = 111
+      Caption = 'No looping pointers'
+      Checked = True
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 9
+    end
+    object cbMaxOffsetsPerNode: TCheckBox
+      Left = 281
+      Height = 19
+      Hint = 'When the pointerscan looks through the list of pointers with a specific value, it goes through every single pointer that has that value. Every time increasing the offset slightly.'#13#10'With this feature enabled the pointerscan will only check the first few pointers with that value.'#13#10#13#10'pro: Extremely fast, and the results have the lowest pointer paths possible.'#13#10'con: You''ll miss a lot of pointers that might be valid too '
+      Top = 60
+      Width = 163
+      Caption = 'Max different offsets per node:'
+      OnChange = cbMaxOffsetsPerNodeChange
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 10
+    end
+    object edtMaxOffsetsPerNode: TEdit
+      Left = 444
+      Height = 21
+      Top = 58
+      Width = 40
+      Enabled = False
+      TabOrder = 11
+      Text = '2'
+    end
+    object cbStaticStacks: TCheckBox
+      Left = 281
+      Height = 19
+      Hint = 'This allows the stack of threads to be seen as static addresses by the pointerscan.'#13#10'The main thread is always a sure bet that it''s the first one in the list. And often the second thread created is pretty stable as well.'#13#10'With more there''s a bigger change they get created and destroyed randomly'#13#10#13#10'When a program enters a function and exits it, the stack pointer decreases and increases, and the data there gets written to.'#13#10'The farther the game is inside function calls, the more static the older data will be.'#13#10#13#10'With max stack offset: you can set the max size that can be deemed as static enough.'#13#10#13#10'pro: It finds paths otherwise never found'#13#10'con: More results, more diskspace '
+      Top = 80
+      Width = 328
+      Caption = 'Allow stack addresses of the first thread(s) to be handled as static'
+      Checked = True
+      OnChange = cbStaticStacksChange
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 12
+    end
+    object lblNumberOfStackThreads: TLabel
+      Left = 296
+      Height = 13
+      Top = 105
+      Width = 193
+      Caption = 'Number of threads from oldest to newest:'
+      ParentColor = False
+    end
+    object edtThreadStacks: TEdit
+      Left = 509
+      Height = 21
+      Hint = 'Fill in the total number of threads that should be allowed to be used as a stack lookup.'#13#10'Thread 1 is usually the main thread of the game, but if that one spawns another thread for game related events, you might want to have that secondary thread as well.'#13#10'More threads is not recommend as they may get created and destroyed on the fly, and are therefore useless as a lookup base, but it depends on the game.'
+      Top = 103
+      Width = 24
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 13
+      Text = '2'
+    end
+    object lblStackSize: TLabel
+      Left = 296
+      Height = 13
+      Top = 124
+      Width = 213
+      Caption = 'Max stackoffset to be deemed static enough:'
+      ParentColor = False
+    end
+    object edtStackSize: TEdit
+      Left = 509
+      Height = 21
+      Top = 124
+      Width = 80
+      TabOrder = 14
+      Text = '4096'
+    end
+    object cbStackOnly: TCheckBox
+      Left = 296
+      Height = 19
+      Hint = 'Enable this if you wish to only find pointer paths with a stack address.'#13#10'Combine this with "Only find paths with a static address" (default on) else this option will have no effect'#13#10#13#10'pro: You''ll only get paths from the stack'#13#10'con: You don''t get get paths from random dll''s or the .exe '
+      Top = 144
+      Width = 213
+      Caption = 'Stack addresses as ONLY static address'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 15
+    end
+    object cbAcceptNonModuleVtable: TCheckBox
+      Left = 296
+      Height = 19
+      Top = 20
+      Width = 185
+      Caption = 'Also accept non-module addresses'
+      Enabled = False
+      TabOrder = 16
+    end
+    object cbCompressedPointerscanFile: TCheckBox
+      Left = 281
+      Height = 19
+      Hint = 'Compresses the generated .PTR files slightly so they take less space on the disk and less time writing to disk.'#13#10'Most of the time the bottleneck of a pointerscan is disk writing, so it is recommended to use this option.'#13#10#13#10'Compressed .PTR files can not be read out by older Cheat Engine versions'
+      Top = 184
+      Width = 152
+      Caption = 'Compressed pointerscan file'
+      Checked = True
+      ParentShowHint = False
+      ShowHint = True
+      State = cbChecked
+      TabOrder = 17
+    end
+    object cbIncludeSystemModules: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 184
+      Width = 132
+      Caption = 'Include system modules'
+      TabOrder = 18
+    end
+    object cbLimitScanToRegionFile: TCheckBox
+      Left = 281
+      Height = 19
+      Top = 165
+      Width = 172
+      Caption = 'Limit scan to specified region file'
+      OnChange = cbLimitScanToRegionFileChange
+      TabOrder = 19
+    end
+  end
+  object cbAddress: TComboBox
+    Left = 8
+    Height = 19
+    Top = 42
+    Width = 492
+    DropDownCount = 0
+    ItemHeight = 13
+    OnChange = edtAddressChange
+    OnDrawItem = cbAddressDrawItem
+    Style = csOwnerDrawFixed
+    TabOrder = 13
+  end
+  object odLoadPointermap: TOpenDialog
+    DefaultExt = '.scandata'
+    Filter = 'All files (*.*)|*.*|scandata files (*.scandata)|*.scandata'
+    FilterIndex = 2
+    left = 544
+    top = 328
+  end
+  object il: TImageList
+    left = 464
+    top = 328
+    Bitmap = {
+      4C69020000001000000010000000FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF006360
+      F80AFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF007774FF1F7774
+      FF2BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00625FF82B5D5B
+      F76F5956F53EFFFFFF00FFFFFF00FFFFFF00FFFFFF007774FF1F7A77FFFF7976
+      FEFF726FFD2BFFFFFF00FFFFFF00FFFFFF00FFFFFF00615EF82B6461F8FF6A68
+      F9FF5451F3A84F4DF229FFFFFF00FFFFFF007774FF1F7A77FFFF817EFFFF817E
+      FEFF7471FDFF6C69FB2BFFFFFF00FFFFFF00605DF72B625FF8FF6F6DFBFF7E7C
+      FFFF625FF8FF4A47F06F4542EE02FFFFFF007673FF087471FEFD7D7AFEFF8A87
+      FFFF7C79FDFF6C69FBFF6361F92B5F5CF72B615EF8FF6E6CFAFF7D7AFFFF615F
+      F7FF4946F0FC4441EE05FFFFFF00FFFFFF00FFFFFF00716EFD086E6BFCFC7774
+      FDFF8682FFFF7673FCFF6462F8FF605DF7FF6D6AFAFF7B79FFFF605DF7FF4845
+      EFFC4341EE08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF006967FB086663
+      F9FC706DFBFF807EFFFF7E7BFFFF7C79FFFF7977FFFF5E5CF7FF4744EFFC4240
+      EE08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00615E
+      F8085D5AF6FD7D79FFFF5E5BFFFF5B58FFFF7674FFFF4643EFFD413FED08FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005C59
+      F62B5D5BF7FF7976FFFF5956FFFF5754FFFF7270FFFF4846F0FF3C39EB2BFFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005B58F62B5C5A
+      F6FF6764FAFF7472FFFF7370FFFF706EFFFF6E6CFFFF5755F7FF3F3DEEFF3230
+      E82BFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF005A57F52B5B59F6FF6663
+      FAFF7471FFFF5A58F6FF4341EEFC3E3CECFD504DF4FF6867FFFF504EF5FF3634
+      EBFF2A27E52BFFFFFF00FFFFFF00FFFFFF005956F52B5B58F6FF6562FAFF7170
+      FFFF5956F6FF4240EEFC3E3BEC083937EB083532E9FC4745F2FF6362FFFF4A48
+      F4FF2F2DE9FF2220E32BFFFFFF00FFFFFF005451F3415856F5FF6361FAFF5855
+      F6FF413FEDFC3D3AEC08FFFFFF00FFFFFF00302DE7082C2AE6FC413FF1FF4C4A
+      F6FF312FEAFF1F1DE241FFFFFF00FFFFFF00FFFFFF004A47F0414F4CF2FF403E
+      EDFD3C39EB08FFFFFF00FFFFFF00FFFFFF00FFFFFF002725E5082422E4FC312F
+      EAFF1F1DE241FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF003F3DED413B38
+      EB08FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00211FE3081E1C
+      E241FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00EAC39DFFE6BF96FFE4BB92FFE4BB92FFD1A06CF5D09E6DF6CC96
+      5FDAC479427EB2673C09FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00E5BE96FFFFFFFEFFFDF3E9FFFDF3EAFFFCF2E8FFFAEFE3FFFAF2
+      E7FFEABB88FFCF8555B3B4693D0CFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00E4BB93FFFEF5EDFFFCDEC5FFFBE0C7FFF9DCC2FFF5D3B4FFFEF9
+      F3FFFAE2C4FFECC193FFC37D4893FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00E4BB92FFFEF6F0FFFCE2CDFFFCE3CDFFFADFC8FFF7D9BCFFF5E9
+      DDFFFAF3EBFFFBF8F3FFCA8353FEFFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00E4BB92FFFEF7F1FFFCE5D2FFFCE4D1FFFBE2CCFFF9DDC4FFF6D7
+      BBFFF3D1AFFFFAEFE4FFCC8758FE34B4D9D05EC2E1FA60C3E2FA60C3E2FA60C3
+      E2FA5FC3E2FAE4BB91FFFFF7F2FFFEE7D5FFFEE7D5FFFDE5D1FFFAE0CAFFF9DE
+      C4FFF7D9BCFFFDF2E7FFCC8757FE36B3DAF8FDFEFEFFFEFFFFFFFEFEFFFFFDFE
+      FFFFFEFFFFFFE4BA91FFFFF7F0FFFFE7D5FFFDE7D6FFFDE6D4FFFCE4D0FFFBE3
+      CBFFFADCC2FFFEF3E8FFCC8656FE35AFDAF0F7FCFEFF8EE4F8FF91DEF5FF9FE0
+      F5FFACE1F6FFCA8452FFFFF7F1FFFFE9D9FFFFEADBFFFFE9D9FFFFE7D7FFFFE5
+      D2FFFFE2CBFFFFF7F1FFCB8555FE36AADAF2F1FAFDFF94DEF5FF93DCF4FF64BC
+      E9FF3594DAFF3594DAFF3594DAFF3594DAFF3594DAFF3594DAFF3594DAFF3594
+      DAFF3594DAFFFBF6EFFFCC8355FE35ABDAFAE8F6FBFF70BCE7FF55AAE2FF4DA5
+      E0FF91C9EBFFFAF3EFFFFDFEFDFFFFFDFCFFFFFDFCFFFEFDFCFFFEFCFBFFFEFE
+      FDFF3594DAFFEFF2E8FFCE8156FF37A6DAFAFEFFFFFFF8FDFFFFF6FDFFFFF5FC
+      FFFFF3FCFEFF9AE4F4FF9AE6F7FF9BE6F6FF9DE5F5FF9EE5F5FF9FE5F4FFDAF3
+      F8FF3594DAFFFDF4EEFFCA8054F936A1DAF9F6FCFEFF94E5F8FF93E5F8FF93E5
+      F8FF91E5F8FF93DBE9FF93D7E3FF93D2DCFF90CED7FF8CC8CFFF86C1C6FFC9D8
+      D6FF3594DAFFC57444E8CA7F53F1369ADAF8F2FAFDFF94E6F8FF92E5F8FF90E5
+      F8FF8BE3F8FF86E2F7FF7FE1F7FF77DEF6FF6CDCF6FF5ED9F4FF4FD5F3FFCCF2
+      FBFF3594DAFFFFFFFF00FFFFFF003594DAF7EFFAFEFF93E5F8FF8FE4F8FF89E3
+      F8FF82E1F7FF7ADFF7FF71DEF6FF67DBF5FF5BD8F4FF4DD4F3FF40D1F2FFCAF2
+      FBFF3594DAFFFFFFFF00FFFFFF00338ED9FBDCF0FAFF98E1F6FF95E0F6FF92DF
+      F6FF8EDEF5FF89DCF5FF85DAF4FF80D9F4FF7AD7F3FF74D5F3FF70D3F2FFC2EA
+      F8FF3594DAFFFFFFFF00FFFFFF002C86D8002D88D8F72D87D8F72D88D8F72D88
+      D8F72D88D8F72D88D8F72D88D8F72D88D8F72D88D8F72D88D8F72D87D8F72D88
+      D8F72C86D800FFFFFF00FFFFFF00
+    }
+  end
+  object odLoadRegionFile: TOpenDialog
+    DefaultExt = '.mregion'
+    Filter = 'Memory region files (*.mregion)|*.mregion|All files (*.*)|*.*'
+    left = 544
+    top = 408
+  end
+end
